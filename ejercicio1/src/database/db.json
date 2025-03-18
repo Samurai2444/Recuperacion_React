@@ -1,0 +1,16 @@
+{
+    "task":[
+        {
+            "_id": 1,
+            "name": "Tarea 1",
+            "description": "Descripcion de la tarea 1",
+            "completed": false
+        },
+        {
+            "_id": 2,
+            "name": "Tarea 2",
+            "description": "Descripcion de la tarea 2",
+            "completed": false
+        }
+    ]
+}

@@ -6,9 +6,22 @@ const TaskContext = createContext();
 export const TaskProvider = ({ children }) => {
     const [task, setTask] = useState({});
 
+  const getTask = async () => {
+    try {
+      const response = await fetch(`${API_URL}/task`);
+      if (!response.ok) {
+        throw new Error("Error al obtener las tareas");
+      }
+      const data = await response.json();
+      setTask(data);
+    } catch (error) {
+      console.log("Error al obtener las tareas (error total)", error);
+    }
+  };
+
   const createTask = async ({ name, description, checked=false }) => {
     try {
-      const response = await fetch(`${API_URL}/api/task/create`, {
+      const response = await fetch(`${API_URL}/task`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,9 +40,9 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const deleteTask = async() => {
+  const deleteTask = async(_id) => {
     try {
-        const response = await fetch(`${API_URL}/api/task/delete`, {
+        const response = await fetch(`${API_URL}/task/${_id}`, {
           method: "DELETE",
         });
   
@@ -43,14 +56,14 @@ export const TaskProvider = ({ children }) => {
       }
     };
 
-    const hasCheck = async(id) =>{
+    const toggleCheck = async(_id) =>{
         try {
-            const response = await fetch(`${API_URL}/api/task/${id}`, {
-              method: "PUT",
+            const response = await fetch(`${API_URL}/task/${_id}`, {
+              method: "PATCH",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ key: 'checked' }),
+              body: JSON.stringify({ checked: !task.checked }),
             });
       
             if (!response.ok) {
@@ -65,7 +78,7 @@ export const TaskProvider = ({ children }) => {
     }
 
   return (
-    <TaskContext.Provider value={{ task, createTask, deleteTask, hasCheck }}>
+    <TaskContext.Provider value={{ task, createTask, deleteTask, toggleCheck, getTask }}>
       {children}
     </TaskContext.Provider>
   );

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
-import TaskPage from "../pages/TaskPage";
+import TaskList from "../pages/TaskList";
+import CreateTask from "../pages/CreateTask";
 
 export const router = createBrowserRouter([
   {
@@ -9,8 +10,12 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <TaskPage />,
-      },  
+        element: <TaskList />,
+      }, 
+      {
+        path: "/create",
+        element: <CreateTask />,
+      }
     ],
   },
 ]);

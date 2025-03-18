@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTask } from '../context/TaskContext';
+import { useState } from 'react';
 
-const TaskPage = () => {
+const CreateTask = () => {
     const [formData, setFormData] = useState({
         name: "",
         description: "",
       });
-      const { createTask } = useTask();
+    const [errors, setErrors] = useState({});
+    const { createTask } = useTask();
     const handleChange = (e) => {
         const nombre = e.target.name;
         setFormData({ ...formData, [nombre]: e.target.value.trim() });
@@ -20,10 +22,11 @@ const TaskPage = () => {
     <div>
         <div>
             <header>
-                Ejercicio 1
+                <h1>Ejercicio 1</h1>
             </header>
             <div className='w-125'>
                 <h1>Tasks</h1>
+                <h1 props={errors} />
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input type='text'
                             id="name"
@@ -48,12 +51,9 @@ const TaskPage = () => {
                     Save
                 </button>
             </div>
-            <div>
-                HOla
-            </div>
         </div>
     </div>
   )
 }
 
-export default TaskPage
+export default CreateTask
