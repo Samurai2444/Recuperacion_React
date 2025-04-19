@@ -5,7 +5,7 @@ const RootLayout = () => {
     <>
     <footer className="bg-gray-800 text-white text-center p-4">
       <header>
-        <h1>Ejercicio 1</h1>
+        <h1>Ejercicio 2</h1>
       </header>
     </footer>
       <main>

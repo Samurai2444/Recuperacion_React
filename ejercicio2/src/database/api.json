@@ -1,0 +1,108 @@
+{
+  "productos": [
+    {
+      "id": "prod1",
+      "nombre": "Champú anticaspa",
+      "marca": "L'Oréal",
+      "descripcion": "Champú profesional para cuero cabelludo sensible",
+      "precio": 12.5
+    },
+    {
+      "id": "prod2",
+      "nombre": "Mascarilla nutritiva",
+      "marca": "Garnier",
+      "descripcion": "Tratamiento para cabello seco y dañado",
+      "precio": 8.9
+    },
+    {
+      "id": "prod3",
+      "nombre": "Cera para peinar",
+      "marca": "American Crew",
+      "descripcion": "Fijación media con brillo natural",
+      "precio": 11
+    }
+  ],
+  "citas": [
+    {
+      "id": "cita1",
+      "usuarioId": "u1",
+      "fecha": "2025-04-10",
+      "horaInicio": "10:00",
+      "servicios": [
+        "srv1",
+        "srv2"
+      ],
+      "duracionTotal": 45
+    },
+    {
+      "id": "cita2",
+      "usuarioId": "u2",
+      "fecha": "2025-04-10",
+      "horaInicio": "11:00",
+      "servicios": [
+        "srv3"
+      ],
+      "duracionTotal": 45
+    },
+    {
+        "id": "cita3",
+        "usuarioId": "aa41",
+        "fecha": "2025-04-10",
+        "horaInicio": "10:00",
+        "servicios": [
+          "srv1",
+          "srv2"
+        ],
+        "duracionTotal": 45
+      }
+  ],
+  "servicios": [
+    {
+      "id": "srv1",
+      "nombre": "Corte de pelo (hombre)",
+      "precio": 15,
+      "duracion": 30,
+      "categoria": "hombre"
+    },
+    {
+      "id": "srv2",
+      "nombre": "Corte de barba",
+      "precio": 10,
+      "duracion": 15,
+      "categoria": "hombre"
+    },
+    {
+      "id": "srv3",
+      "nombre": "Corte de pelo (mujer)",
+      "precio": 20,
+      "duracion": 45,
+      "categoria": "mujer"
+    },
+    {
+      "id": "srv4",
+      "nombre": "Tinte",
+      "precio": 35,
+      "duracion": 60,
+      "categoria": "unisex"
+    },
+    {
+      "id": "srv5",
+      "nombre": "Peinado",
+      "precio": 18,
+      "duracion": 30,
+      "categoria": "unisex"
+    }
+  ],
+  "usuario": [
+    {
+      "id": "u1",
+      "email": "juanperez@example.com",
+      "password": "123456"
+    },
+    {
+      "id": "aa41",
+      "email": "carlos@example.com",
+      "password": "123456"
+    }
+  ]
+}
