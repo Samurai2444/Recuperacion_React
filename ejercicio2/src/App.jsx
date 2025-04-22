@@ -5,6 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ProductProvider } from "./context/ProductContext";
 import { ServiceProvider } from "./context/ServiceContext";
 import { ReservaProvider } from "./context/ReservaContext";
+import { TimeProvider } from "./context/TimeContext";
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
       <ProductProvider>
         <ServiceProvider>
           <ReservaProvider>
-            <RouterProvider router={router} />
+            <TimeProvider>
+              <RouterProvider router={router} />
+            </TimeProvider>
           </ReservaProvider>
         </ServiceProvider>
       </ProductProvider>

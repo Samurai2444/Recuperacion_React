@@ -2,16 +2,21 @@ import React, { use, useEffect, useState } from 'react';
 import { useReserva } from '../context/ReservaContext';
 import { useAuth } from '../context/AuthContext';
 import { useService } from '../context/ServiceContext';
+import { useTime } from '../context/TimeContext';
+import { useNavigate } from 'react-router-dom';
 
 const ReservationPage = () => {
   const { getReserva, setNewReserva, reserva, loading, error } = useReserva();
     const { services, getService } = useService();
   const { isAuthenticated, token } = useAuth();
+  const { setReservationTime } = useTime([]);
   const [newReservation, setNewReservation] = useState({
     fecha: '',
     horaInicio: '',
     servicios: [],
   });
+  const navigate= useNavigate();
+
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -37,27 +42,44 @@ const ReservationPage = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!token) {
-      alert('Debes iniciar sesión para realizar una reserva.');
-      return;
-    }
+  const hadleBack = () => {
+    navigate('/'); // Redirigir a la página de inicio
+  }
 
-    // Calcular la duración total sumando la duración de los servicios seleccionados
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!token) {
+    alert('Debes iniciar sesión para realizar una reserva.');
+    return;
+  }
+
+  // Calcular la duración total sumando la duración de los servicios seleccionados
   const duracionTotal = newReservation.servicios.reduce((total, serviceId) => {
     const service = services.find((s) => s.id === serviceId); // Buscar el servicio por ID
     return total + (service ? service.duracion : 0); // Sumar la duración si el servicio existe
   }, 0);
-  
-    const reservationData = {
-      ...newReservation,
-      usuarioId: token,
-      duracionTotal, // Ejemplo: 30 minutos por servicio
-    };
-    await setNewReserva(reservationData);
-    setNewReservation({ fecha: '', horaInicio: '', servicios: [] });
-  };
+
+  // Convertir la hora de inicio a formato decimal
+  const horaInicioDecimal = parseFloat(newReservation.horaInicio.replace(':', '.'));
+
+    try {
+      // Validar la hora de inicio y la duración con setReservationTime
+      await setReservationTime(horaInicioDecimal, duracionTotal);
+
+      // Si la validación es exitosa, crear la reserva
+      const reservationData = {
+        ...newReservation,
+        usuarioId: token,
+        duracionTotal,
+      };
+      await setNewReserva(reservationData);
+
+      // Reiniciar el formulario
+      setNewReservation({ fecha: '', horaInicio: '', servicios: [] });
+    } catch (error) {
+      alert(error); // Mostrar el error si setReservationTime falla
+    }
+  }; 
 
   if (loading) {
     return <div>Cargando reservas...</div>;
@@ -69,6 +91,9 @@ const ReservationPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <button onClick={hadleBack} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+        Volver al Inicio
+      </button>
       <h1 className="text-3xl font-bold mb-6">Reservar Cita</h1>
 
       {/* Formulario para crear una nueva reserva */}

@@ -60,7 +60,7 @@
       "fecha": "2025-02-12",
       "horaInicio": "11:00",
       "servicios": [
-        "cita3"
+        "srv3"
       ],
       "usuarioId": "undefined",
       "duracionTotal": 30
@@ -85,6 +85,28 @@
       ],
       "usuarioId": "undefined",
       "duracionTotal": 45
+    },
+    {
+      "id": "d654",
+      "fecha": "2025-04-24",
+      "horaInicio": "11:58",
+      "servicios": [
+        "srv2"
+      ],
+      "usuarioId": "undefined",
+      "getTime": "2025-04-24",
+      "duracionTotal": 15
+    },
+    {
+      "id": "de60",
+      "fecha": "2025-04-24",
+      "horaInicio": "01:58",
+      "servicios": [
+        "srv2"
+      ],
+      "usuarioId": "undefined",
+      "getTime": "2025-04-24",
+      "duracionTotal": 15
     }
   ],
   "servicios": [
