@@ -3,7 +3,7 @@ import { useReserva } from '../context/ReservaContext';
 import { useAuth } from '../context/AuthContext';
 
 const ProfilePage = () => {
-  const { getReservaByUserId } = useReserva();
+  const { getReservaByUserId, removeReserva } = useReserva();
   const { token } = useAuth(); // Obtener el token del usuario autenticado
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
@@ -26,6 +26,14 @@ const ProfilePage = () => {
     fetchReservas();
   }, [token, getReservaByUserId]);
 
+  const hadleRemove = (id) => async () => {
+    try {
+      await removeReserva(id); // Llamar a la función para eliminar la reserva
+    } catch (error) {
+      console.error('Error al eliminar la reserva:', error);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-start justify-center py-10">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl">
@@ -45,7 +53,7 @@ const ProfilePage = () => {
                     <p className="text-sm text-gray-600">Fecha: {cita.fecha}</p>
                     <p className="text-sm text-gray-600">Hora: {cita.horaInicio}</p>
                   </div>
-                  <button className="text-red-600 hover:underline text-sm">
+                  <button className="text-red-600 hover:underline text-sm" onClick={hadleRemove(cita.id)}>
                     Cancelar
                   </button>
                 </li>

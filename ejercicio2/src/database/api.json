@@ -45,16 +45,47 @@
       "duracionTotal": 45
     },
     {
-        "id": "cita3",
-        "usuarioId": "aa41",
-        "fecha": "2025-04-10",
-        "horaInicio": "10:00",
-        "servicios": [
-          "srv1",
-          "srv2"
-        ],
-        "duracionTotal": 45
-      }
+      "id": "cita3",
+      "usuarioId": "aa41",
+      "fecha": "2025-04-10",
+      "horaInicio": "10:00",
+      "servicios": [
+        "srv1",
+        "srv2"
+      ],
+      "duracionTotal": 45
+    },
+    {
+      "id": "7bb9",
+      "fecha": "2025-02-12",
+      "horaInicio": "11:00",
+      "servicios": [
+        "cita3"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 30
+    },
+    {
+      "id": "1684",
+      "fecha": "2025-04-26",
+      "horaInicio": "10:06",
+      "servicios": [
+        "srv2"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 15
+    },
+    {
+      "id": "06c3",
+      "fecha": "2025-04-25",
+      "horaInicio": "13:14",
+      "servicios": [
+        "srv1",
+        "srv2"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 45
+    }
   ],
   "servicios": [
     {

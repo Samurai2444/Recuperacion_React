@@ -67,12 +67,30 @@ export const ReservaProvider = ({ children }) => {
             setLoading(false);
         }
     }
+    const removeReserva = async (reservaId) => {
+        setLoading(true);
+        setError(null); // Clear previous errors
+        try {
+            const response = await fetch(`${API_URL}/citas/${reservaId}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error('Error al eliminar la reserva');
+            }
+            setReserva((prevReservas) => prevReservas.filter((reserva) => reserva.id !== reservaId));
+        } catch (error) {
+            setError(error.message); // Set error state
+        } finally {
+            setLoading(false);
+        }
+    };
   return (
     <ReservaContext.Provider
       value={{
         getReserva,
         setNewReserva,
         getReservaByUserId,
+        removeReserva,
         reserva,
         loading,
         error,

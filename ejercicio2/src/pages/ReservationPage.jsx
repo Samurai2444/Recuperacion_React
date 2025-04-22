@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useReserva } from '../context/ReservaContext';
 import { useAuth } from '../context/AuthContext';
+import { useService } from '../context/ServiceContext';
 
 const ReservationPage = () => {
   const { getReserva, setNewReserva, reserva, loading, error } = useReserva();
+    const { services, getService } = useService();
   const { isAuthenticated, token } = useAuth();
   const [newReservation, setNewReservation] = useState({
     fecha: '',
@@ -16,6 +18,10 @@ const ReservationPage = () => {
       getReserva();
     }
   }, [isAuthenticated]);
+  
+  useEffect(() => {
+    getService(); // Llamar a getService al montar el componente
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,10 +43,17 @@ const ReservationPage = () => {
       alert('Debes iniciar sesión para realizar una reserva.');
       return;
     }
+
+    // Calcular la duración total sumando la duración de los servicios seleccionados
+  const duracionTotal = newReservation.servicios.reduce((total, serviceId) => {
+    const service = services.find((s) => s.id === serviceId); // Buscar el servicio por ID
+    return total + (service ? service.duracion : 0); // Sumar la duración si el servicio existe
+  }, 0);
+  
     const reservationData = {
       ...newReservation,
       usuarioId: token,
-      duracionTotal: newReservation.servicios.length * 30, // Ejemplo: 30 minutos por servicio
+      duracionTotal, // Ejemplo: 30 minutos por servicio
     };
     await setNewReserva(reservationData);
     setNewReservation({ fecha: '', horaInicio: '', servicios: [] });
@@ -85,7 +98,7 @@ const ReservationPage = () => {
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">Servicios</label>
           <div className="grid grid-cols-2 gap-4">
-            {reserva.map((service) => (
+            {services.map((service) => (
               <div key={service.id} className="flex items-center">
                 <input
                   type="checkbox"
@@ -110,9 +123,9 @@ const ReservationPage = () => {
       </form>
 
       {/* Lista de reservas existentes */}
-      <h2 className="text-2xl font-semibold mb-4">Mis Reservas</h2>
+      <h2 className="text-2xl font-semibold mb-4">Reservas Recientes</h2>
       {reserva.length === 0 ? (
-        <p className="text-gray-600">No tienes reservas registradas.</p>
+        <p className="text-gray-600">No hay reservas registradas.</p>
       ) : (
         <ul className="space-y-4">
           {reserva.map((res) => (
