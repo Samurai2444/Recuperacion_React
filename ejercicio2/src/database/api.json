@@ -87,26 +87,64 @@
       "duracionTotal": 45
     },
     {
-      "id": "d654",
-      "fecha": "2025-04-24",
-      "horaInicio": "11:58",
+      "id": "5d50",
+      "fecha": "2025-05-08",
+      "horaInicio": "10:38",
+      "servicios": [
+        "srv1"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 30
+    },
+    {
+      "id": "0ec5",
+      "fecha": "2025-05-03",
+      "horaInicio": "09:41",
+      "servicios": [
+        "srv4"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 60
+    },
+    {
+      "id": "35b7",
+      "fecha": "2025-05-24",
+      "horaInicio": "10:16",
+      "servicios": [
+        "srv1"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 30
+    },
+    {
+      "id": "d10b",
+      "fecha": "2025-05-16",
+      "horaInicio": "11:23",
+      "servicios": [
+        "srv1"
+      ],
+      "usuarioId": "undefined",
+      "duracionTotal": 30
+    },
+    {
+      "id": "f2f7",
+      "fecha": "2025-05-16",
+      "horaInicio": "11:24",
       "servicios": [
         "srv2"
       ],
       "usuarioId": "undefined",
-      "getTime": "2025-04-24",
       "duracionTotal": 15
     },
     {
-      "id": "de60",
-      "fecha": "2025-04-24",
-      "horaInicio": "01:58",
+      "id": "41d4",
+      "fecha": "2025-05-16",
+      "horaInicio": "11:34",
       "servicios": [
-        "srv2"
+        "srv1"
       ],
       "usuarioId": "undefined",
-      "getTime": "2025-04-24",
-      "duracionTotal": 15
+      "duracionTotal": 30
     }
   ],
   "servicios": [

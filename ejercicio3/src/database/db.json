@@ -1,0 +1,23 @@
+{
+    "usuarios": [
+    {
+    "id": 1,
+    "username": "ana",
+    "password": "contraseñaEncriptada",
+    "favoritas": [2]
+    }
+    ],
+    "recetas": [
+ {
+ "id": 1,
+ "titulo": "Tortilla de patatas",
+ "ingredientes": ["Huevos", "Patatas", "Cebolla"],
+ "instrucciones": "Pelar las patatas, freír y mezclar con los huevos.",
+ "valoracion": 4.7,
+ "dificultad": "media",
+ "autorId": 1,
+ "colaboradores": [2],
+ "ultimaEdicion": "2025-05-13T12:00:00Z"
+ }
+ ]
+}

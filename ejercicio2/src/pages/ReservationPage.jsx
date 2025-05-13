@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ReservationPage = () => {
   const { getReserva, setNewReserva, reserva, loading, error } = useReserva();
-    const { services, getService } = useService();
+  const { services, getService } = useService();
   const { isAuthenticated, token } = useAuth();
   const { setReservationTime } = useTime([]);
   const [newReservation, setNewReservation] = useState({
@@ -48,24 +48,23 @@ const ReservationPage = () => {
 
  const handleSubmit = async (e) => {
   e.preventDefault();
+  console.log(newReservation);
+  console.log(newReservation.horaInicio);
   if (!token) {
     alert('Debes iniciar sesión para realizar una reserva.');
     return;
   }
-
   // Calcular la duración total sumando la duración de los servicios seleccionados
   const duracionTotal = newReservation.servicios.reduce((total, serviceId) => {
     const service = services.find((s) => s.id === serviceId); // Buscar el servicio por ID
     return total + (service ? service.duracion : 0); // Sumar la duración si el servicio existe
   }, 0);
-
-  // Convertir la hora de inicio a formato decimal
-  const horaInicioDecimal = parseFloat(newReservation.horaInicio.replace(':', '.'));
-
+  // Convertir la hora de inicio a minutos desde la medianoche
+  const [horas, minutos] = newReservation.horaInicio.split(':').map(Number);
+  const horaInicioMinutos = horas * 60 + minutos;
     try {
       // Validar la hora de inicio y la duración con setReservationTime
-      await setReservationTime(horaInicioDecimal, duracionTotal);
-
+      await setReservationTime(horaInicioMinutos, duracionTotal);
       // Si la validación es exitosa, crear la reserva
       const reservationData = {
         ...newReservation,
@@ -73,7 +72,6 @@ const ReservationPage = () => {
         duracionTotal,
       };
       await setNewReserva(reservationData);
-
       // Reiniciar el formulario
       setNewReservation({ fecha: '', horaInicio: '', servicios: [] });
     } catch (error) {
